@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/quannt/vue-news.svg?branch=develop)](https://travis-ci.org/quannt/vue-news)
+
 # vue-news
 
 > A news portal built powered by Vuejs and Nuxtjs
