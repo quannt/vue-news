@@ -1,9 +1,15 @@
 language: node_js
 node_js:
-  - 'node'
+  - node
 cache: npm
-# safelist
 branches:
   only:
     - master
     - develop
+deploy:
+  provider: heroku
+  on: develop
+  app:
+    develop: vue-news-beta
+  api_key:
+    secure: LhS5y4LxTlnYjKj+oel41sPo+izeADh3F7vFapYa7Q4tLKTsNq9guZDKIPlUb5Udv7WqQQL8fsjKYDTMrBEnc+jhfjN9BcsdAXROAzGjFAOE0qCndQN557GDYgwJ9HjcATUgYFtqfvwNct1N10JfBXwC1VZN2TEJ6VVvbiTaBDIw9/vPt/SVkvbCbWJZWmIqeu3pOxlP4yUKpOCkTrdvEdobqiR3FJCVX2hq+4PtuYKIf7Fp0cWLmxCuNHrk4lz36i3YWCRms6CQg5iu+SoATujGhkURCIxgO5uOtgtkIJJ0eBujXmCdJHe27st5FTmyYPhEi1ViQrrQZIc9C/InvSZtnk+NKjQ3Fxpy7w6nAis1tGH9KFvSJ9Bl8yXziuLoAfSlwMfHnQWtXK9gV3UiBFckGKe5m2cGDpRvEyI/2e69naRe1cWhRQJQWsrVpP4hIiPmW40561zzJitfcZmuw5ynbkIve/xo5M40EE7VEcXlsfzXQuaRuK4JS4kCyq6p+pLdJl+UvYunxBjfboT+Tv6GZkIrwfr0zuzbr3N5MrHDGNeNLvUo32v4hm3IaBccgk+tgjvzk14MELCQGyNPZwmwmUOk99HpGf/fIKI2oliDUGiKgc7OoTS4vPVOPwvCC565C1HU/olpT4EeJzRmEUW8cAzW0k65np/l7ZJ+zws=

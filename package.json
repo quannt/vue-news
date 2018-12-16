@@ -4,6 +4,10 @@
   "description": "A news portal built powered by Vuejs and Nuxtjs",
   "author": "quannt",
   "private": true,
+  "engines": {
+    "node": "10.14.2",
+    "npm": "6.4.1"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
@@ -11,7 +15,8 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
