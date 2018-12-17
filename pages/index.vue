@@ -1,23 +1,28 @@
 <template>
   <section class="container">
     <div>
-      <logo/>
-      <h1 class="title">vue-news</h1>
+      <h1 class="title">Vue New</h1>
       <h2 class="subtitle">A news portal built powered by Vuejs and Nuxtjs</h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
     </div>
+    <ul id="example-1">
+      <li v-for="(article,index) in articles" :key="index">{{ article.title }}</li>
+    </ul>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  components: {},
+  data() {
+    return { articles: [] }
+  },
+  async asyncData({ params, $axios, error }) {
+    try {
+      let response = await $axios.get(`/api/top-headlines?country=sg`)
+      return { articles: response.data.articles }
+    } catch {
+      error({ statusCode: 404, message: 'Content not found' })
+    }
   }
 }
 </script>
