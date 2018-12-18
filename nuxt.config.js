@@ -1,5 +1,13 @@
 const pkg = require('./package')
 
+let newsAPIToken = ''
+
+if (process.env.NUXT_PHASE === 'development') {
+  newsAPIToken = ``
+} else {
+  newsAPIToken = `${process.env.NEWS_API_KEY}`
+}
+
 module.exports = {
   mode: 'universal',
 
@@ -14,6 +22,10 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+
+  env: {
+    newsAPIToken: newsAPIToken
   },
 
   /*
@@ -50,7 +62,7 @@ module.exports = {
     '/api': {
       target: 'https://newsapi.org/v2/',
       pathRewrite: { '^/api/': '' },
-      headers: { authorization: '' }
+      headers: { authorization: `Bearer ${process.env.newsAPIToken}` }
     }
   },
 
