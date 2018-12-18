@@ -24,10 +24,6 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  env: {
-    newsAPIToken: newsAPIToken
-  },
-
   /*
   ** Customize the progress-bar color
   */
@@ -62,7 +58,7 @@ module.exports = {
     '/api': {
       target: 'https://newsapi.org/v2/',
       pathRewrite: { '^/api/': '' },
-      headers: { authorization: `Bearer ${process.env.newsAPIToken}` }
+      headers: { authorization: `Bearer ${newsAPIToken}` }
     }
   },
 
