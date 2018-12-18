@@ -1,5 +1,13 @@
 const pkg = require('./package')
 
+let newsAPIToken = ''
+
+if (process.env.NUXT_PHASE === 'development') {
+  newsAPIToken = ``
+} else {
+  newsAPIToken = `${process.env.NEWS_API_KEY}`
+}
+
 module.exports = {
   mode: 'universal',
 
@@ -13,9 +21,11 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+
+  env: {
+    newsAPIToken: newsAPIToken
   },
 
   /*
@@ -26,15 +36,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-    '~/assets/css/tailwind.css'
-  ],
+  css: ['~/assets/css/tailwind.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   /*
   ** Nuxt.js modules
@@ -46,8 +53,17 @@ module.exports = {
   /*
   ** Axios module configuration
   */
+
+  // See https://github.com/nuxt-community/axios-module#options
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'https://newsapi.org/v2/',
+      pathRewrite: { '^/api/': '' },
+      headers: { authorization: `Bearer ${process.env.newsAPIToken}` }
+    }
   },
 
   /*
