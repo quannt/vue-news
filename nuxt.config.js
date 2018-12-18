@@ -3,7 +3,7 @@ const pkg = require('./package')
 let newsAPIToken = ''
 
 if (process.env.NUXT_PHASE === 'development') {
-  newsAPIToken = ``
+  newsAPIToken = `c7976d747cbb4292b91aefd2da4213d7`
 } else {
   newsAPIToken = `${process.env.NEWS_API_KEY}`
 }
