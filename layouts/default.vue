@@ -1,6 +1,20 @@
 <template>
   <div>
+    <header class="header">
+      <a href="/" class="header-img__container">
+        <img src="~/assets/logo.png">
+      </a>
+    </header>
     <nuxt/>
+    <footer class="footer">
+      <div class="text">
+        <a href="https://newsapi.org">📝 Powered by NewsAPI.org</a>
+      </div>
+      <div class="text">
+        💻 by
+        <a href="https://github.com/quannt">@quannt</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -24,32 +38,35 @@ html {
   margin: 0;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.header {
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #f2f4f6;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.header-img__container img {
+  width: 80px;
+  height: 80px;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 18px;
+  background-color: #f2f4f6;
+  color: #505f63;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.footer .text {
+  padding: 5px 0;
+}
+
+.footer .text a {
+  color: #505f63;
 }
 </style>
