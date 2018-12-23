@@ -1,10 +1,17 @@
 <template>
   <div class="article-container">
-    <div class="article-image">
-      <a :href="article.url">
-        <img :src="article.urlToImage" alt class="article-image__image">
-      </a>
-    </div>
+    <no-ssr>
+      <div class="article-image">
+        <a :href="article.url">
+          <common-image>
+            <img slot="image" :src="article.urlToImage" alt class="article-image__image">
+            <img slot="preloader" src="~/assets/default-image.png" alt class="article-image__image">
+            <img slot="error" src="~/assets/default-image.png" alt class="article-image__image">
+          </common-image>
+        </a>
+      </div>
+    </no-ssr>
+
     <div class="article-body">
       <a :href="article.url">
         <div class="article-body__header">{{ article.title}}</div>
@@ -16,9 +23,13 @@
 
 <script>
 import { format } from 'timeago.js'
+import CommonImage from '~/components/common/CommonImage'
 
 export default {
   name: 'Item',
+  components: {
+    CommonImage
+  },
   props: {
     article: {
       type: Object,
