@@ -67,6 +67,7 @@ html {
 }
 
 .footer .text a {
+  text-decoration: none;
   color: #505f63;
 }
 </style>
