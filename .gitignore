@@ -81,4 +81,4 @@ dist
 .idea
 
 .DS_Store
-.env.local.js
+env.local.js

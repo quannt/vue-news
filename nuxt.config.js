@@ -1,10 +1,10 @@
 const pkg = require('./package')
+// eslint-disable-next-line
+const API_KEY = require('./env.local.js').API_KEY
 
 let newsAPIToken = ''
 
 if (process.env.NUXT_PHASE === 'development') {
-  // eslint-disable-next-line
-  import { API_KEY } from './env.local.js'
   newsAPIToken = API_KEY
 } else {
   newsAPIToken = `${process.env.NEWS_API_KEY}`
