@@ -23,6 +23,18 @@
           <span>See more articles</span>
         </button>
       </div>
+      <div v-show="isLoadingArticles" class="content-loader__container">
+        <content-loader :height="160" :width="400" :speed="2" :unique-key="uniqueKey">
+          <rect x="168" y="20" rx="5" ry="5" width="220" height="10"/>
+          <rect x="169" y="47" rx="5" ry="5" width="220" height="10"/>
+          <rect x="169" y="76" rx="5" ry="5" width="220" height="10"/>
+          <rect x="170" y="103" rx="5" ry="5" width="220" height="10"/>
+          <rect x="3" y="12.2" rx="0" ry="0" width="160" height="137"/>
+          <rect x="206" y="108.2" rx="0" ry="0" width="0" height="0"/>
+          <rect x="294" y="130.2" rx="0" ry="0" width="0" height="0"/>
+          <rect x="171" y="127" rx="5" ry="5" width="220" height="10"/>
+        </content-loader>
+      </div>
     </div>
   </section>
 </template>
@@ -30,11 +42,14 @@
 <script>
 import Item from '~/components/home/Item'
 import Headline from '~/components/home/Headline'
+import { ContentLoader } from 'vue-content-loader'
+
 import _get from 'lodash/get'
 export default {
   components: {
     Item,
-    Headline
+    Headline,
+    ContentLoader
   },
   data() {
     return {
@@ -42,7 +57,9 @@ export default {
       headline: {},
       pageSize: 20,
       page: 1,
-      hasMoreArticles: true
+      hasMoreArticles: true,
+      uniqueKey: '',
+      isLoadingArticles: false
     }
   },
   async asyncData({ params, $axios, error }) {
@@ -55,7 +72,12 @@ export default {
       let articles = response.data.articles
       const headline = articles.shift()
 
-      return { articles, headline, pageSize, page }
+      // this unique key is for content loader to be able to work with SSR
+      // https://glitch.com/edit/#!/vue-content-loader?path=pages/index.vue:16:55
+      const uniqueKey = Math.random()
+        .toString(36)
+        .substring(2)
+      return { articles, headline, pageSize, page, uniqueKey }
     } catch {
       error({ statusCode: 404, message: 'Content not found' })
     }
@@ -63,11 +85,13 @@ export default {
   methods: {
     async handleLoadMore() {
       try {
+        this.isLoadingArticles = true
         this.page = this.page + 1
         const response = await this.fetchArticles(this.pageSize, this.page)
         const newArticles = _get(response, 'data.articles', [])
         if (newArticles.length === 0) {
           this.hasMoreArticles = false
+          this.isLoadingArticles = false
           return
         }
         this.articles = [...this.articles, ...newArticles]
@@ -76,6 +100,7 @@ export default {
         console.log(error)
         this.page = this.page - 1
       }
+      this.isLoadingArticles = false
     },
     fetchArticles(pageSize = 20, page = 1) {
       return this.$axios.get(
@@ -95,5 +120,9 @@ export default {
   display: flex;
   justify-content: center;
   padding: 18px;
+}
+
+.content-loader__container {
+  padding: 0 18px;
 }
 </style>
