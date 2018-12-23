@@ -1,7 +1,7 @@
 <template>
-  <div class="article-container">
+  <div class="headline-container">
     <no-ssr>
-      <div class="article-image">
+      <div class="headline-image">
         <a :href="article.url">
           <common-image>
             <img slot="image" :src="article.urlToImage" alt class="article-image__image">
@@ -14,7 +14,7 @@
 
     <div class="article-body">
       <a :href="article.url">
-        <div class="article-body__header">{{ article.title}}</div>
+        <h2 class="article-body__header">{{ article.title}}</h2>
         <div class="article-body__footer">{{ article.source.name }} - {{ timeAgo }}</div>
       </a>
     </div>
@@ -26,7 +26,7 @@ import { format } from 'timeago.js'
 import CommonImage from '~/components/common/CommonImage'
 
 export default {
-  name: 'Item',
+  name: 'Headline',
   components: {
     CommonImage
   },
@@ -68,15 +68,9 @@ export default {
 a {
   text-decoration: none;
 }
-.article-container {
+.headline-container {
   display: flex;
-  padding: 18px;
-}
-
-.article-image {
-  width: 120px;
-  height: 90px;
-  flex-shrink: 0;
+  flex-direction: column;
 }
 
 .article-image__image {
@@ -84,12 +78,12 @@ a {
 }
 
 .article-body {
-  flex: 1 1 auto;
-  padding-left: 18px;
+  padding: 18px;
 }
 
 .article-body__header {
-  font-size: 16px;
+  font-size: 21px;
+  line-height: 1.2;
   color: #171717;
 }
 
