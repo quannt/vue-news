@@ -55,21 +55,22 @@ export default {
     return {
       articles: [],
       headline: {},
-      pageSize: 20,
+      pageSize: 0,
       page: 1,
-      hasMoreArticles: true,
       uniqueKey: '',
-      isLoadingArticles: false
+      isLoadingArticles: false,
+      totalResults: 0
     }
   },
   async asyncData({ params, $axios, error }) {
     try {
-      const pageSize = 20
+      const pageSize = 10
       const page = 1
       const response = await $axios.get(
         `/api/top-headlines?country=sg&pageSize=${pageSize}&page=${page}`
       )
       let articles = response.data.articles
+      let totalResults = response.data.totalResults
       const headline = articles.shift()
 
       // this unique key is for content loader to be able to work with SSR
@@ -77,9 +78,14 @@ export default {
       const uniqueKey = Math.random()
         .toString(36)
         .substring(2)
-      return { articles, headline, pageSize, page, uniqueKey }
+      return { articles, headline, totalResults, pageSize, page, uniqueKey }
     } catch {
       error({ statusCode: 404, message: 'Content not found' })
+    }
+  },
+  computed: {
+    hasMoreArticles() {
+      return this.page * this.pageSize < this.totalResults
     }
   },
   methods: {
@@ -89,12 +95,10 @@ export default {
         this.page = this.page + 1
         const response = await this.fetchArticles(this.pageSize, this.page)
         const newArticles = _get(response, 'data.articles', [])
-        if (newArticles.length === 0) {
-          this.hasMoreArticles = false
-          this.isLoadingArticles = false
-          return
-        }
+        const totalResults = _get(response, 'data.totalResults', 0)
+
         this.articles = [...this.articles, ...newArticles]
+        this.totalResults = totalResults
       } catch (error) {
         // TODO: log error to server here
         console.log(error)
