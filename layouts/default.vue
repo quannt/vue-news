@@ -1,8 +1,9 @@
 <template>
   <div>
-    <header class="header">
+    <header v-cloak class="header">
       <a href="/" class="header-img__container">
         <img src="~/assets/logo.png">
+        <span>News Hatch</span>
       </a>
     </header>
     <nuxt/>
@@ -18,10 +19,10 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: Montserrat, Futura, -apple-system, 'Gill Sans', 'Gill Sans MT',
+    'Century Gothic', CenturyGothic, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -38,20 +39,35 @@ html {
   margin: 0;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .header {
   display: flex;
-  justify-content: flex-end;
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #f2f4f6;
+  padding: 0 18px;
+}
+
+.header-img__container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .header-img__container img {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
+}
+
+.header-img__container span {
+  color: #171717;
+  font-size: 20px;
 }
 
 .footer {
