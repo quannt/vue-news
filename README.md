@@ -2,7 +2,15 @@
 
 # News Hatch
 
-![news hatch screenshot](https://i.imgur.com/ilwS42k.png 'Screenshot')
+![news hatch screenshot](https://i.imgur.com/PvQkQrO.png 'Screenshot')
+
+<p align="center">
+  <a href="http://www.news-hatch.xyz/" target="_blank">
+    <img src="https://i.imgur.com/PvQkQrO.png" width="256px"
+    ><br>
+    Live Demo
+  </a>
+</p>
 
 ## Motivation
 
