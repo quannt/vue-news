@@ -1,7 +1,9 @@
 import Item from '~/components/home/Item'
 import CommonImage from '~/components/common/CommonImage'
-
 import { shallowMount } from '@vue/test-utils'
+import { format } from 'timeago.js'
+
+jest.mock('timeago.js')
 
 const article = {
   source: { id: null, name: 'Gizmochina.com' },
@@ -43,5 +45,15 @@ describe('Item.vue', () => {
 
     const commonImage = wrapper.find(CommonImage)
     expect(commonImage.is(CommonImage)).toBe(true)
+  })
+
+  test('renders snapshot correctly', () => {
+    format.mockImplementation(() => '1 week ago')
+
+    const wrapper = shallowMount(Item, {
+      propsData: { article }
+    })
+
+    expect(wrapper.element).toMatchSnapshot()
   })
 })
