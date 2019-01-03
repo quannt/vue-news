@@ -57,7 +57,6 @@ export default {
   },
   computed: {
     timeAgo() {
-      // return format(Date.now() - 11 * 1000 * 60 * 60)
       return format(this.article.publishedAt)
     }
   }

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item.vue renders snapshot correctly 1`] = `
+<div
+  class="article-container"
+>
+  <no-ssr>
+    <div
+      class="article-image"
+    >
+      <a
+        href="https://www.gizmochina.com/2019/01/02/sony-xperia-xz4-antutu-score-puts-it-ahead-of-every-phone/"
+      >
+        <common-image-stub>
+          <img
+            alt=""
+            class="article-image__image"
+            src="https://www.gizmochina.com/wp-content/uploads/2018/11/Sony-Xperia-XZ4-renders-2.jpg"
+          />
+           
+          <img
+            alt=""
+            class="article-image__image"
+            src="~/assets/default-image.png"
+          />
+           
+          <img
+            alt=""
+            class="article-image__image"
+            src="~/assets/default-image.png"
+          />
+        </common-image-stub>
+      </a>
+    </div>
+  </no-ssr>
+   
+  <div
+    class="article-body"
+  >
+    <a
+      href="https://www.gizmochina.com/2019/01/02/sony-xperia-xz4-antutu-score-puts-it-ahead-of-every-phone/"
+    >
+      <div
+        class="article-body__header"
+      >
+        Sony Xperia XZ4 AnTuTu score puts it ahead of every phone - gizmochina
+      </div>
+       
+      <div
+        class="article-body__footer"
+      >
+        Gizmochina.com - 1 week ago
+      </div>
+    </a>
+  </div>
+</div>
+`;
